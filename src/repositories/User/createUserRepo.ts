@@ -4,7 +4,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
-export const createUserFunc = async (email: string, password: string) => {
+export const createUserRepo = async (email: string, password: string) => {
   const uuid = uuidV4()
 
   const salt = await genSalt();
