@@ -20,6 +20,7 @@ model User {
 model Client {
   id String @id @default(uuid())
   name String
+  email String @unique
   phone String
   address String
   order Order[]
@@ -28,9 +29,11 @@ model Client {
 model Product {
   id String @id @default(uuid())
   name String
+  price Int
   code String
   characteristics String
   image Bytes?
+  
 }
 
 model Order {
@@ -38,6 +41,6 @@ model Order {
   client Client @relation(fields: [clientId], references: [id])
   clientId String
   product_list String[]
-  status String
   created_at DateTime @default(now())
+  status String
 }
