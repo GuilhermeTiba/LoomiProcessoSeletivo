@@ -20,6 +20,8 @@ export const authPasswordController = async (req, res) => {
       accessToken
     })
   } else {
-    res.status(405).send('Not Allowed')
+    res.status(405).send({
+      error : 'Not Allowed'
+    })
   }
 };
