@@ -33,16 +33,15 @@ model Product {
   code Int @default(autoincrement())
   characteristics product_types
   image Bytes?
-  
 }
 
 model Order {
   id String @id @default(uuid())
-  client Client @relation(fields: [clientId], references: [id])
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
   clientId String
   product_list String[]
+  status order_status @default(AWAITING_PAYMENT)
   created_at DateTime @default(now())
-  status String
 }
 
 enum product_types {
@@ -55,4 +54,16 @@ enum product_types {
   CELLPHONE
   AUDIO
   PROJECTORS
+}
+
+enum order_status {
+  AWAITING_PAYMENT
+  IN_PROGRESS
+  IN_SEPARATION
+  IN_PRODUCTION
+  IN_REVENUE
+  READY_TO_BE_SENT
+  DELIVERED_TO_THE_CARRIER
+  DELIVERED
+  CANCELED 
 }
