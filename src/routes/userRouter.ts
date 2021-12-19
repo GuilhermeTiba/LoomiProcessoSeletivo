@@ -4,6 +4,7 @@ import { deleteUserController } from '../controllers/User/deleteUserController';
 import { getSingleUserController, getUsersWithSameEmailProviderController } from '../controllers/User/getUserController';
 import { updateUserPasswordController } from '../controllers/User/updateUserController';
 import { authenticateToken } from '../middlewares/authenticateToken';
+import { authPasswordController } from '../controllers/Auth/authPasswordControler';
 
 const router = Router();
 
@@ -11,6 +12,7 @@ router.get('/:idOrEmail', authenticateToken, getSingleUserController);
 router.get('/get-users-with-same-email-provider/:emailProvider', authenticateToken, getUsersWithSameEmailProviderController);
 
 router.post('/register', createUserController);
+router.post('/login', authPasswordController);
 
 router.put('/:id', authenticateToken, updateUserPasswordController);
 

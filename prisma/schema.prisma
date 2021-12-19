@@ -30,8 +30,8 @@ model Product {
   id String @id @default(uuid())
   name String
   price Int
-  code String
-  characteristics String
+  code Int @default(autoincrement())
+  characteristics product_types
   image Bytes?
   
 }
@@ -43,4 +43,16 @@ model Order {
   product_list String[]
   created_at DateTime @default(now())
   status String
+}
+
+enum product_types {
+  HARDWARE
+  PERIPHERALS
+  CHAIR
+  GAMES
+  COMPUTERS
+  TELEVISOR
+  CELLPHONE
+  AUDIO
+  PROJECTORS
 }
