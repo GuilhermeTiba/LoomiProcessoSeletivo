@@ -7,8 +7,8 @@ import { authenticateToken } from '../middlewares/authenticateToken';
 
 const router = Router();
 
-router.get('/singleUser/:id', authenticateToken, getSingleProductController);
-router.get('/valueFilter', authenticateToken, getAllProductsBetweenAValueController);
+router.get('/single-user/:id', authenticateToken, getSingleProductController);
+router.get('/price-filter', authenticateToken, getAllProductsBetweenAValueController);
 router.get('/characteristics', authenticateToken, getSameCharacteristicProductsController);
 
 router.post('/', authenticateToken, createProductController);

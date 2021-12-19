@@ -7,8 +7,8 @@ const getProductController_1 = require("../controllers/Product/getProductControl
 const updateProductController_1 = require("../controllers/Product/updateProductController");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
 const router = (0, express_1.Router)();
-router.get('/singleUser/:id', authenticateToken_1.authenticateToken, getProductController_1.getSingleProductController);
-router.get('/valueFilter', authenticateToken_1.authenticateToken, getProductController_1.getAllProductsBetweenAValueController);
+router.get('/single-user/:id', authenticateToken_1.authenticateToken, getProductController_1.getSingleProductController);
+router.get('/price-filter', authenticateToken_1.authenticateToken, getProductController_1.getAllProductsBetweenAValueController);
 router.get('/characteristics', authenticateToken_1.authenticateToken, getProductController_1.getSameCharacteristicProductsController);
 router.post('/', authenticateToken_1.authenticateToken, createProductController_1.createProductController);
 router.put('/:id', authenticateToken_1.authenticateToken, updateProductController_1.updateProductController);

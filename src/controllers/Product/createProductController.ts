@@ -2,7 +2,7 @@ import { createProductRepo } from "../../repositories/Product/createProductRepo"
 
 
 export const createProductController = async (req, res) => {
-  const {name, price, code, characteristics, image} = req.body;
+  const {name, price, characteristics, image} = req.body;
 
   const createProduct = await createProductRepo(name, price, characteristics, image)
 
