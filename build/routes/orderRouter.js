@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const createOrderController_1 = require("../controllers/Order/createOrderController");
+const deleteOrderController_1 = require("../controllers/Order/deleteOrderController");
+const getOrderController_1 = require("../controllers/Order/getOrderController");
+const updateOrderController_1 = require("../controllers/Order/updateOrderController");
+const authenticateToken_1 = require("../middlewares/authenticateToken");
+const router = (0, express_1.Router)();
+router.get('/single-order/:id', authenticateToken_1.authenticateToken, getOrderController_1.getSingleOrderController);
+router.get('/all-orders-client', authenticateToken_1.authenticateToken, getOrderController_1.getAllOrdersFromAClientController);
+router.get('/custom-timestamp-filter', authenticateToken_1.authenticateToken, getOrderController_1.getAllOrdersFromACustomTimestampController);
+router.post('/', authenticateToken_1.authenticateToken, createOrderController_1.createOrderController);
+router.put('/:id', authenticateToken_1.authenticateToken, updateOrderController_1.updateOrderController);
+router.delete('/:id', authenticateToken_1.authenticateToken, deleteOrderController_1.deleteOrderController);
+module.exports = router;

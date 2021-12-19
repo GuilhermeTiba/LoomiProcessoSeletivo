@@ -20,6 +20,7 @@ model User {
 model Client {
   id String @id @default(uuid())
   name String
+  email String @unique
   phone String
   address String
   order Order[]
@@ -28,16 +29,41 @@ model Client {
 model Product {
   id String @id @default(uuid())
   name String
-  code String
-  characteristics String
+  price Int
+  code Int @default(autoincrement())
+  characteristics product_types
   image Bytes?
 }
 
 model Order {
   id String @id @default(uuid())
-  client Client @relation(fields: [clientId], references: [id])
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
   clientId String
   product_list String[]
-  status String
+  status order_status @default(AWAITING_PAYMENT)
   created_at DateTime @default(now())
+}
+
+enum product_types {
+  HARDWARE
+  PERIPHERALS
+  CHAIR
+  GAMES
+  COMPUTERS
+  TELEVISOR
+  CELLPHONE
+  AUDIO
+  PROJECTORS
+}
+
+enum order_status {
+  AWAITING_PAYMENT
+  IN_PROGRESS
+  IN_SEPARATION
+  IN_PRODUCTION
+  IN_REVENUE
+  READY_TO_BE_SENT
+  DELIVERED_TO_THE_CARRIER
+  DELIVERED
+  CANCELED 
 }
