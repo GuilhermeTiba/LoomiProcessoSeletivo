@@ -1,3 +1,4 @@
+import { checkIfQueryParamsAreNumbers } from "../../errors/productErrorHandler";
 import { getAllProductsBetweenAValueRepo, getSameCharacteristicProductsRepo, getSingleProductRepo } from "../../repositories/Product/getProductRepo";
 
 
@@ -12,13 +13,25 @@ export const getSingleProductController = async (req, res) => {
 }
 
 export const getAllProductsBetweenAValueController = async (req, res) => {
-  const {lowValue, highValue} = req.query
-  
-  const getProductsBetwenValues = await getAllProductsBetweenAValueRepo(Number(lowValue), Number(highValue));
+  const {lowValue, highValue} = req.query;
 
-  res.status(200).send({
-    getProductsBetwenValues,
-  });
+  if(checkIfQueryParamsAreNumbers(lowValue, highValue)){
+    return res.status(400).send({
+      error: 'Query values must be numbers',
+    });
+  };
+  
+  try {
+    const getProductsBetwenValues = await getAllProductsBetweenAValueRepo(Number(lowValue), Number(highValue));
+
+    res.status(200).send({
+      getProductsBetwenValues,
+    });    
+  } catch (error) {
+    res.status(error.statusCode || 500).send({
+      error: error,
+    });
+  };
 };
 
 export const getSameCharacteristicProductsController = async (req, res) => {
