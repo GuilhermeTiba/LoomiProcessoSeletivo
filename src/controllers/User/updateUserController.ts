@@ -5,16 +5,21 @@ export const updateUserPasswordController = async (req, res) => {
   const { id } = req.params;
   const { lastPassword, newPassword } = req.body;
 
-  const updateUserPassword = await updateUserPasswordRepo(id, lastPassword, newPassword);
+  try {
+    const updateUserPassword = await updateUserPasswordRepo(id, lastPassword, newPassword);
 
-  if(updateUserPassword === null){
-    res.status(403).send({
-      Error: 'Last password is incorrect'
-    })
-    return
-  }
-
-  res.status(200).send({
-    updateUserPassword
-  })
-}
+    if(updateUserPassword === null){
+      return res.status(403).send({
+        Error: 'Last password is incorrect',
+      });
+    };
+    res.status(200).send({
+      updateUserPassword,
+    });
+      
+  } catch (error) {
+    res.status(error.statusCode || 500).send({
+      error: error,
+    });
+  };
+};

@@ -5,12 +5,14 @@ const createOrderController_1 = require("../controllers/Order/createOrderControl
 const deleteOrderController_1 = require("../controllers/Order/deleteOrderController");
 const getOrderController_1 = require("../controllers/Order/getOrderController");
 const updateOrderController_1 = require("../controllers/Order/updateOrderController");
+const orderSchema_1 = require("../formValidation/schemas/orderSchema");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
+const validationFormMiddleware_1 = require("../middlewares/validationFormMiddleware");
 const router = (0, express_1.Router)();
 router.get('/single-order/:id', authenticateToken_1.authenticateToken, getOrderController_1.getSingleOrderController);
 router.get('/all-orders-client', authenticateToken_1.authenticateToken, getOrderController_1.getAllOrdersFromAClientController);
 router.get('/custom-timestamp-filter', authenticateToken_1.authenticateToken, getOrderController_1.getAllOrdersFromACustomTimestampController);
-router.post('/', authenticateToken_1.authenticateToken, createOrderController_1.createOrderController);
-router.put('/:id', authenticateToken_1.authenticateToken, updateOrderController_1.updateOrderController);
+router.post('/', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(orderSchema_1.createOrderSchema), createOrderController_1.createOrderController);
+router.put('/:id', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(orderSchema_1.updateOrderSchema), updateOrderController_1.updateOrderController);
 router.delete('/:id', authenticateToken_1.authenticateToken, deleteOrderController_1.deleteOrderController);
 module.exports = router;
