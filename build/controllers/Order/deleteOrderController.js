@@ -4,9 +4,17 @@ exports.deleteOrderController = void 0;
 const deleteOrderRepo_1 = require("../../repositories/Order/deleteOrderRepo");
 const deleteOrderController = async (req, res) => {
     const { id } = req.params;
-    const deleteOrder = await (0, deleteOrderRepo_1.deleteOrderRepo)(id);
-    res.status(200).send({
-        deleteOrder
-    });
+    try {
+        const deleteOrder = await (0, deleteOrderRepo_1.deleteOrderRepo)(id);
+        res.status(200).send({
+            deleteOrder,
+        });
+    }
+    catch (error) {
+        res.status(error.statusCode || 500).send({
+            error: error,
+        });
+    }
+    ;
 };
 exports.deleteOrderController = deleteOrderController;

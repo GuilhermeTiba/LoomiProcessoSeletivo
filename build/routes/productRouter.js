@@ -5,12 +5,14 @@ const createProductController_1 = require("../controllers/Product/createProductC
 const deleteProductController_1 = require("../controllers/Product/deleteProductController");
 const getProductController_1 = require("../controllers/Product/getProductController");
 const updateProductController_1 = require("../controllers/Product/updateProductController");
+const productSchema_1 = require("../formValidation/schemas/productSchema");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
+const validationFormMiddleware_1 = require("../middlewares/validationFormMiddleware");
 const router = (0, express_1.Router)();
 router.get('/single-user/:id', authenticateToken_1.authenticateToken, getProductController_1.getSingleProductController);
 router.get('/price-filter', authenticateToken_1.authenticateToken, getProductController_1.getAllProductsBetweenAValueController);
 router.get('/characteristics', authenticateToken_1.authenticateToken, getProductController_1.getSameCharacteristicProductsController);
-router.post('/', authenticateToken_1.authenticateToken, createProductController_1.createProductController);
-router.put('/:id', authenticateToken_1.authenticateToken, updateProductController_1.updateProductController);
+router.post('/', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(productSchema_1.createProductSchema), createProductController_1.createProductController);
+router.put('/:id', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(productSchema_1.updateProductSchema), updateProductController_1.updateProductController);
 router.delete('/:id', authenticateToken_1.authenticateToken, deleteProductController_1.deleteProductController);
 module.exports = router;

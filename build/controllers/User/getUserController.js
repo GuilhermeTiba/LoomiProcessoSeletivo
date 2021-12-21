@@ -4,15 +4,23 @@ exports.getUsersWithSameEmailProviderController = exports.getSingleUserControlle
 const getUserRepo_1 = require("../../repositories/User/getUserRepo");
 const getSingleUserController = async (req, res) => {
     const { idOrEmail } = req.params;
-    const getSingleUser = await (0, getUserRepo_1.getSingleUserRepo)(idOrEmail);
-    if (getSingleUser === null) {
-        res.status(404).send('No User found with this email or id');
-        return;
+    try {
+        const getSingleUser = await (0, getUserRepo_1.getSingleUserRepo)(idOrEmail);
+        if (getSingleUser === null) {
+            res.status(404).send('No User found with this email or id');
+            return;
+        }
+        ;
+        res.status(200).send({
+            getSingleUser,
+        });
+    }
+    catch (error) {
+        res.status(error.statusCode || 500).send({
+            error: error,
+        });
     }
     ;
-    res.status(200).send({
-        getSingleUser,
-    });
 };
 exports.getSingleUserController = getSingleUserController;
 const getUsersWithSameEmailProviderController = async (req, res) => {

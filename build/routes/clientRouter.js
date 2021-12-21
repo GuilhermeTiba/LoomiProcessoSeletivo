@@ -5,10 +5,12 @@ const createClientController_1 = require("../controllers/Client/createClientCont
 const deleteClientController_1 = require("../controllers/Client/deleteClientController");
 const getClientController_1 = require("../controllers/Client/getClientController");
 const updateClientController_1 = require("../controllers/Client/updateClientController");
+const clientSchema_1 = require("../formValidation/schemas/clientSchema");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
+const validationFormMiddleware_1 = require("../middlewares/validationFormMiddleware");
 const router = (0, express_1.Router)();
 router.get('/:id', authenticateToken_1.authenticateToken, getClientController_1.getClientController);
-router.post('/', authenticateToken_1.authenticateToken, createClientController_1.createClientController);
-router.put('/:id', authenticateToken_1.authenticateToken, updateClientController_1.updateClientController);
+router.post('/', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(clientSchema_1.createClientSchema), createClientController_1.createClientController);
+router.put('/:id', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(clientSchema_1.updateClientSchema), updateClientController_1.updateClientController);
 router.delete('/:id', authenticateToken_1.authenticateToken, deleteClientController_1.deleteClientController);
 module.exports = router;
