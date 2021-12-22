@@ -15,6 +15,7 @@ model User {
   email String @unique
   password String
   verified Boolean @default(false)
+  verificationCode String
 }
 
 model Client {

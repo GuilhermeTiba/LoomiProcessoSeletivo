@@ -11,7 +11,7 @@ export const getSingleProductRepo = async (id) => {
   return getSingleProduct
 };
 
-export const getAllProductsBetweenAValueRepo = async (lowValue, highValue) => {
+export const getAllProductsBetweenAValueRepo = async (lowValue=0, highValue=100000) => {
   const getProductsBetwenValues = await prisma.product.findMany({
     where:{
       price: {

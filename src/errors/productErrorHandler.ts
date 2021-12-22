@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
-export const checkIfQueryParamsAreNumbers = (lowValue, highValue) => {
+export const checkIfQueryParamsAreNumbers = (lowValue = 0, highValue = 0) => {
   if(!isNaN(lowValue) && !isNaN(highValue)){
     return false
   } else {

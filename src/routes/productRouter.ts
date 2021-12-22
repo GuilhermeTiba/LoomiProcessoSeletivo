@@ -9,7 +9,7 @@ import { formValidation } from '../middlewares/validationFormMiddleware';
 
 const router = Router();
 
-router.get('/single-user/:id', authenticateToken, getSingleProductController);
+router.get('/single-product/:id', authenticateToken, getSingleProductController);
 router.get('/price-filter', authenticateToken, getAllProductsBetweenAValueController);
 router.get('/characteristics', authenticateToken, getSameCharacteristicProductsController);
 
