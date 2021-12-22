@@ -12,7 +12,7 @@ const getSingleProductController = async (req, res) => {
 };
 exports.getSingleProductController = getSingleProductController;
 const getAllProductsBetweenAValueController = async (req, res) => {
-    const { lowValue, highValue } = req.query;
+    const { lowValue = 0, highValue = 10 ** 7 } = req.query;
     if ((0, productErrorHandler_1.checkIfQueryParamsAreNumbers)(lowValue, highValue)) {
         return res.status(400).send({
             error: 'Query values must be numbers',

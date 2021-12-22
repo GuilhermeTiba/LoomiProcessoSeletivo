@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkIfNotAllProductsOnListExists = exports.checkIfQueryParamsAreNumbers = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const checkIfQueryParamsAreNumbers = (lowValue, highValue) => {
+const checkIfQueryParamsAreNumbers = (lowValue = 0, highValue = 0) => {
     if (!isNaN(lowValue) && !isNaN(highValue)) {
         return false;
     }
