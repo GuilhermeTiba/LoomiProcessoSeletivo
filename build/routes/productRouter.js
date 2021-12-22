@@ -9,7 +9,7 @@ const productSchema_1 = require("../formValidation/schemas/productSchema");
 const authenticateToken_1 = require("../middlewares/authenticateToken");
 const validationFormMiddleware_1 = require("../middlewares/validationFormMiddleware");
 const router = (0, express_1.Router)();
-router.get('/single-user/:id', authenticateToken_1.authenticateToken, getProductController_1.getSingleProductController);
+router.get('/single-product/:id', authenticateToken_1.authenticateToken, getProductController_1.getSingleProductController);
 router.get('/price-filter', authenticateToken_1.authenticateToken, getProductController_1.getAllProductsBetweenAValueController);
 router.get('/characteristics', authenticateToken_1.authenticateToken, getProductController_1.getSameCharacteristicProductsController);
 router.post('/', authenticateToken_1.authenticateToken, (0, validationFormMiddleware_1.formValidation)(productSchema_1.createProductSchema), createProductController_1.createProductController);

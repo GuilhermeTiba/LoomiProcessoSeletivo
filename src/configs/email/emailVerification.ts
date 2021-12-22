@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.AUTH_EMAIL,
@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
 export const checkIfEmailIsWorking  = transporter.verify((error, success) => {
   if(error) {
     console.log(error);
+    return false;
   } else {
-    console.log("Ready for messages");
-    console.log(success);
+    return true;
   };
 });

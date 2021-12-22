@@ -13,7 +13,7 @@ export const getSingleProductController = async (req, res) => {
 }
 
 export const getAllProductsBetweenAValueController = async (req, res) => {
-  const {lowValue, highValue} = req.query;
+  const { lowValue = 0, highValue = 10**7 } = req.query;
 
   if(checkIfQueryParamsAreNumbers(lowValue, highValue)){
     return res.status(400).send({
@@ -23,7 +23,6 @@ export const getAllProductsBetweenAValueController = async (req, res) => {
   
   try {
     const getProductsBetwenValues = await getAllProductsBetweenAValueRepo(Number(lowValue), Number(highValue));
-
     res.status(200).send({
       getProductsBetwenValues,
     });    

@@ -1,9 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
-import { checkIfEmailIsWorking } from './configs/email/emailVerification';
 
 const cors = require('cors');
 
+const swaggerUi = require('swagger-ui-express');
+
+const { swaggerDocument } = require('./swagger');
 const userRouter = require('./routes/userRouter.ts');
 const clientRouter = require('./routes/clientRouter.ts');
 const productRouter = require('./routes/productRouter.ts');
@@ -14,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/user', userRouter);
 app.use('/client', clientRouter);
 app.use('/product', productRouter);
