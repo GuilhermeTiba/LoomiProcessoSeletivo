@@ -4,7 +4,7 @@ import { transporter } from './emailVerification';
 
 
 export const sendVerificationEmail = (id: string, email: string, uniqueString: string) => {
-  const currentUrl = 'http://localhost:3000/';
+  const currentUrl = 'https://desafio-loomi-app.herokuapp.com/';
 
   const mailOptions = {
     from: process.env.AUTH_EMAIL,
