@@ -15,5 +15,5 @@ export const updateClientRepo = async (id, name?, email?, phone?, address?) => {
     },
   });
 
-  return updateClient
+  return updateClient;
 };
