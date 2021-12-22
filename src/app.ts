@@ -5,10 +5,10 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 
 const { swaggerDocument } = require('./swagger');
-const userRouter = require('./routes/userRouter.ts');
-const clientRouter = require('./routes/clientRouter.ts');
-const productRouter = require('./routes/productRouter.ts');
-const orderRouter = require('./routes/orderRouter.ts');
+const userRouter = require('./routes/userRouter');
+const clientRouter = require('./routes/clientRouter');
+const productRouter = require('./routes/productRouter');
+const orderRouter = require('./routes/orderRouter');
 
 const app = express();
 
