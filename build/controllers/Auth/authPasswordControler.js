@@ -7,21 +7,30 @@ const generateAccessToken_1 = require("../../configs/token/generateAccessToken")
 const prisma = new client_1.PrismaClient();
 const authPasswordController = async (req, res) => {
     const { email, password } = req.body;
-    const findUserPassword = await prisma.user.findUnique({
-        where: {
-            email: email
+    try {
+        const findUserPassword = await prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        });
+        if (await (0, bcrypt_1.compare)(password, findUserPassword.password)) {
+            const accessToken = (0, generateAccessToken_1.generateAccessToken)({ email });
+            res.status(200).send({
+                accessToken,
+            });
         }
-    });
-    if (await (0, bcrypt_1.compare)(password, findUserPassword.password)) {
-        const accessToken = (0, generateAccessToken_1.generateAccessToken)({ email });
-        res.status(200).send({
-            accessToken
+        else {
+            res.status(405).send({
+                error: 'Not Allowed',
+            });
+        }
+        ;
+    }
+    catch (error) {
+        res.status(error.statusCode || 500).send({
+            error: error,
         });
     }
-    else {
-        res.status(405).send({
-            error: 'Not Allowed'
-        });
-    }
+    ;
 };
 exports.authPasswordController = authPasswordController;

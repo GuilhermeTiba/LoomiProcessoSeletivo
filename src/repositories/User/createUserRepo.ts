@@ -10,7 +10,7 @@ export const createUserRepo = async (email: string, password: string) => {
   const uniqueString = uuidV4();
 
   const salt = await genSalt();
-  const hashedVerifationCode = await hash(uniqueString, salt);
+  const hashedVerificationCode = await hash(uniqueString, salt);
   const hashedPassword = await hash(password, salt);
 
   const createUser = await prisma.user.create({
@@ -19,7 +19,7 @@ export const createUserRepo = async (email: string, password: string) => {
       email: email,
       password: hashedPassword,
       verified: false,
-      verificationCode: hashedVerifationCode,
+      verificationCode: hashedVerificationCode,
     },
   });
 

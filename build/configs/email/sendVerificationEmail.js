@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendVerificationEmail = void 0;
 const emailVerification_1 = require("./emailVerification");
 const sendVerificationEmail = (id, email, uniqueString) => {
-    const currentUrl = 'http://localhost:3000/';
+    const currentUrl = 'https://desafio-loomi-app.herokuapp.com/';
     const mailOptions = {
         from: process.env.AUTH_EMAIL,
         to: email,
