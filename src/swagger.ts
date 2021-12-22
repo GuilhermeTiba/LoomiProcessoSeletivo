@@ -9,7 +9,7 @@ export const swaggerDocument = {
     "url": "https://desafio-loomi-app.herokuapp.com",
   }],
   "paths": {
-    "user/login": {
+    "/user/login": {
       "post": {
         "summary": "Given JSON, return a Autentication TOKEN",
         "description": "",
@@ -201,7 +201,7 @@ export const swaggerDocument = {
         }],
       },
       "delete": {
-        "summary": "Delete bed (Need JSON)",
+        "summary": "Delete user (Need JSON)",
         "description": "",
         "responses": {
           "200": {
@@ -214,7 +214,7 @@ export const swaggerDocument = {
             "$ref": "#/components/responses/NotFound",
           },
         },
-        "tags": ["section"],
+        "tags": ["user"],
         "servers": [{
           "url": "https://desafio-loomi-app.herokuapp.com",
         }],
@@ -223,9 +223,9 @@ export const swaggerDocument = {
         "url": "https://desafio-loomi-app.herokuapp.com",
       }],
     },
-    "/section/beds-status-quantity-per-section/{id}": {
+    "/client/{id}": {
       "get": {
-        "summary": "Given a section ID, return the beds status quantity",
+        "summary": "Given a client ID, returns client informations",
         "description": "",
         "responses": {
           "200": {
@@ -238,89 +238,16 @@ export const swaggerDocument = {
             "$ref": "#/components/responses/ServiceUnavailable",
           },
         },
-        "tags": ["section"],
+        "tags": ["client"],
         "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
+          "url": "https://desafio-loomi-app.herokuapp.com",
         }],
       },
       "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
+        "url": "https://desafio-loomi-app.herokuapp.com",
       }],
-    },
-    "/section/patient/{id}": {
-      "get": {
-        "summary": "Return a patient JSON",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["section"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/section/bed": {
-      "post": {
-        "summary": "Create a new Bed",
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                  },
-                  "section": {
-                    "type": "string",
-                  },
-                  "type": {
-                    "type": "string",
-                  },
-                },
-              },
-              "examples": {
-                "0": {
-                  "value": "{\r\n    \"name\": \"A6\",\r\n    \"type\": \"COMMON\",\r\n    \"section\": \"PEDIATRY\"\r\n}",
-                },
-              },
-            },
-          },
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict",
-          },
-        },
-        "tags": ["section"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
       "put": {
-        "summary": "Update bed (Need JSON)",
+        "summary": "Update client (Need JSON)",
         "description": "",
         "requestBody": {
           "content": {
@@ -331,6 +258,436 @@ export const swaggerDocument = {
                   "id": {
                     "type": "string",
                   },
+                  "name": {
+                    "type": "string",
+                  },
+                  "email": {
+                    "type": "string",
+                  },
+                  "phone": {
+                    "type": "string",
+                  },
+                  "address": {
+                    "type": "string",
+                  },
+                },
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"id\": \"fc2dd946-4005-40d7-8d54-1c66b25279dc\",\n    \"name\": \"Guilherme Tiberios\"\n}    \"email\": \"guitib2001@gmail.com\"\n}    \"phone\": \"992674928\"\n}    \"address\": \"Av Boa viagem 3629 ap 402\"\n}",
+                },
+              },
+            },
+          },
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+        },
+        "tags": ["client"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "delete": {
+        "summary": "Delete client (Need JSON)",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+        },
+        "tags": ["client"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+    },
+    "/client": {
+      "post": {
+        "summary": "Create a new Client",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                  },
+                  "email": {
+                    "type": "string",
+                  },
+                  "phone": {
+                    "type": "string",
+                  },
+                  "address": {
+                    "type": "string",
+                  },
+                },
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"name\": \"Guilherme\",\r\n    \"email\": \"guitib2000@gmail.com\",\r\n    \"phone\": \"992674929\"\r\n   \"address\": \"Av Boa viagem 3628 ap 401\"\r\n}",
+                },
+              },
+            },
+          },
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict",
+          },
+        },
+        "tags": ["client"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+    },
+    "/product/single-product/{:id}": {
+      "get": {
+        "summary": "Given a product ID, returns product informations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/product/price-filter?lowValue=(number)&highValue=(number)": {
+      "get": {
+        "summary": "return a list of products between both values",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/product/characteristics": {
+      "get": {
+        "summary": "get a list of products that have the same characteristics, like COMPUTERS",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/product": {
+      "post": {
+        "summary": "Create a new Product",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                  },
+                  "price": {
+                    "type": "number",
+                  },
+                  "characteristics": {
+                    "type": "string",
+                  },
+                  "image": {
+                    "type": "file",
+                  },
+                },
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"name\": \"Computador Gamer ryzen 5 5600X\",\r\n    \"price\": \"9000\",\r\n    \"characteristics\": \"COMPUTERS\"\r\n   \"image\": \"src/imagefile\"\r\n}",
+                },
+              },
+            },
+          },
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict",
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+    },
+    "/product/{id}": {
+      "put": {
+        "summary": "Update Product (Need JSON)",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                  },
+                  "name": {
+                    "type": "string",
+                  },
+                  "price": {
+                    "type": "number",
+                  },
+                  "characteristics": {
+                    "type": "string",
+                  },
+                  "image": {
+                    "type": "imageFile",
+                  },
+                },
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"id\": \"bfdc8824-a481-4621-acde-63c2d29dda1c\",\n    \"name\": \"Mouse Raposa\"\n}    \"price\": \"150\"\n}    \"characteristics\": \"PERIPHERALS\"\n}    \"image\": \"src/mouseRaposa.img\"\n}",
+                },
+              },
+            },
+          },
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "delete": {
+        "summary": "Delete Product (Need JSON)",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+        },
+        "tags": ["product"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+    },
+    "/order/single-order/{:id}": {
+      "get": {
+        "summary": "Given order Id, returns order information",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+        },
+        "tags": ["order"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/order/all-orders-client?clientId=(string)": {
+      "get": {
+        "summary": "Given client id, returns all orders from this id",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+        },
+        "tags": ["order"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/order/custom-timestamp-filter?initialTime=(Date)&finalTime=(Date)": {
+      "get": {
+        "summary": "Given a date, returns all orders between this 2 times",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+        },
+        "tags": ["order"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+      "servers": [{
+        "url": "https://desafio-loomi-app.herokuapp.com",
+      }],
+    },
+    "/order": {
+      "post": {
+        "summary": "Create a new Order",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "string",
+                  },
+                  "product_list": {
+                    "type": "Array<string>",
+                  },
+                },
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"clientId\": \"fc2dd946-4005-40d7-8d54-1c66b25279dc\",\r\n    \"product_list\": \"['cce59b62-1ab2-49c5-bae9-d95e54a1ef8e','0768ab94-250a-4371-8cf6-82f4578352fc','7793bcb2-05fa-4851-a5b1-c452e4f05b0d']\",\r\n}",
+                },
+              },
+            },
+          },
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK",
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound",
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable",
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict",
+          },
+        },
+        "tags": ["order"],
+        "servers": [{
+          "url": "https://desafio-loomi-app.herokuapp.com",
+        }],
+      },
+    },
+    "/order/{:id}": {
+      "put": {
+        "summary": "Update Order (Need JSON)",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                  },
+                  "clientId": {
+                    "type": "string",
+                  },
+                  "product_list": {
+                    "type": "Array<string>",
+                  },
                   "status": {
                     "type": "string",
                   },
@@ -338,7 +695,7 @@ export const swaggerDocument = {
               },
               "examples": {
                 "0": {
-                  "value": "{\n    \"id\": \"df589863-f3a9-40c9-88b4-d1ce3826f93c\",\n    \"status\": \"CLEANING_NEEDED\"\n}",
+                  "value": "{\r\n    \"clientId\": \"fc2dd946-4005-40d7-8d54-1c66b25279dc\",\r\n    \"status\": \"DELIVERED\",\r\n}",
                 },
               },
             },
@@ -355,13 +712,13 @@ export const swaggerDocument = {
             "$ref": "#/components/responses/NotFound",
           },
         },
-        "tags": ["section"],
+        "tags": ["order"],
         "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
+          "url": "https://desafio-loomi-app.herokuapp.com",
         }],
       },
       "delete": {
-        "summary": "Delete bed (Need JSON)",
+        "summary": "Delete Order (Need JSON)",
         "description": "",
         "responses": {
           "200": {
@@ -374,378 +731,11 @@ export const swaggerDocument = {
             "$ref": "#/components/responses/NotFound",
           },
         },
-        "tags": ["section"],
+        "tags": ["order"],
         "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
+          "url": "https://desafio-loomi-app.herokuapp.com",
         }],
       },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/section/patient": {
-      "post": {
-        "summary": "Create a new patient (Need JSON)",
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sex": {
-                    "type": "string",
-                  },
-                  "bedId": {
-                    "type": "string",
-                  },
-                  "last_name": {
-                    "type": "string",
-                  },
-                  "diagnosis": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                    },
-                  },
-                  "additional_informations": {
-                    "type": "string",
-                  },
-                  "first_name": {
-                    "type": "string",
-                  },
-                  "age": {
-                    "type": "integer",
-                  },
-                  "ssn": {
-                    "type": "string",
-                  },
-                },
-              },
-              "examples": {
-                "0": {
-                  "value": "{\r\n    \"age\": 21,\r\n    \"sex\":\"MALE\",\r\n    \"first_name\":\"Malas\",\r\n    \"last_name\":\"lulis\",\r\n    \"ssn\":\"12341512887\",\r\n    \"additional_informations\":\"EXAUSTÃO APOS PASSAR 3 DIAS NO RPG DO DEMONIO,NEW WORLD\",\r\n    \"bedId\":\"df589863-f3a9-40c9-88b4-d1ce3826f93c\",\r\n    \"diagnosis\":[\"NEUROLOGY\"]\r\n}",
-                },
-              },
-            },
-          },
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest",
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["section"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "put": {
-        "summary": "Update patient (Need JSON)",
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "patientId": {
-                    "type": "string",
-                  },
-                  "age": {
-                    "type": "integer",
-                  },
-                },
-              },
-              "examples": {
-                "0": {
-                  "value": "{\n    \"patientId\": \"84472eaf-eb0f-4471-86fc-bab3cb17788e\",\n    \"age\": 54\n}",
-                },
-              },
-            },
-          },
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest",
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["section"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "delete": {
-        "summary": "Delete patient (Need JSON)",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["section"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/beds-percentage-per-status": {
-      "get": {
-        "summary": "Return a count of beds per status",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/beds-quantity-per-status": {
-      "get": {
-        "summary": "Auto generated using Swagger Inspector",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/patient-quantity-per-diagnosis": {
-      "get": {
-        "summary": "Return JSON with count of patient per diagnosis",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/patient-quantity-per-sex": {
-      "get": {
-        "summary": "Return JSON with count of patient per sex",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/patient-quantity-per-age": {
-      "get": {
-        "summary": "Return JSON with count of patient per Age (range)",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/daily-in-and-outs": {
-      "get": {
-        "summary": "Return In and Outs for a Day",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/weekly-in-and-outs": {
-      "get": {
-        "summary": "Return In and Outs for a Week",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/monthly-in-and-outs": {
-      "get": {
-        "summary": "Return In and Outs for a Month",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/yearly-in-and-outs": {
-      "get": {
-        "summary": "Return In and Outs for a Year",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/beds-quantity-per-status-and-section": {
-      "get": {
-        "summary": "Return JSON with beds count per status in a section",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
-    },
-    "/dashboard/average-time-per-funcionality": {
-      "get": {
-        "summary": "Return JSON with average time per status",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK",
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable",
-          },
-        },
-        "tags": ["dashboard"],
-        "servers": [{
-          "url": "https://leithos-navin.herokuapp.com",
-        }],
-      },
-      "servers": [{
-        "url": "https://leithos-navin.herokuapp.com",
-      }],
     },
   },
   "components": {
